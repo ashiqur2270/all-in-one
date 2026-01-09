@@ -712,17 +712,11 @@ window.addEventListener('load', () => { renderDocList(); applyPageSettings(); })
     //---------App signal cmd--------
     
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    const swCode = `
-      self.addEventListener('fetch', (event) => {
-        event.respondWith(fetch(event.request));
-      });
-    `;
-    const blob = new Blob([swCode], {type: 'text/javascript'});
-    const url = URL.createObjectURL(blob);
-    navigator.serviceWorker.register(url);
-  });
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js');
+    });
 }
+
 
 // Service Worker Registration for Offline Support and PWA
 if ('serviceWorker' in navigator) {
